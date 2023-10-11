@@ -1,51 +1,72 @@
-# Data Processing and Matching Scripts
+# Data Validation: Qualtrics and Matomo Integration
 
-This repository contains two primary Python scripts dedicated to processing and matching data sets:
+This project comprises scripts designed to facilitate the validation of Qualtrics datasets by comparing them against Matomo's "thankyou-social" submissions. The scripts read, process, analyze the datasets, and generate an Excel file with visual representation in the form of pie charts.
 
-1. **Matomo Data Processor (`matomo_processing.py`)**: A tool that filters a dataset (`Matomo.csv`) to capture specific visitor interactions, saving the output to `filtered_data.csv`.
-2. **Qualtrics Data Matcher (`qualtrics_matching.py`)**: This script matches survey responses from `Qualtrics.csv` against the processed data in `filtered_data.csv`, identifying and annotating matches, resulting in a combined dataset saved as `Qualtrics_matching.csv`.
+## Files in the Project:
 
-## Detailed Descriptions
-
-### 1. Matomo Data Processor (`matomo_processing.py`)
-- **Purpose**: Designed to sieve through a dataset, focusing on specific interactions related to the 'ThankYou - GoFresh' page title.
+### 1. `matomo_processing.py`: 
+- **Description**: This script focuses on refining the raw Matomo data. It reads the dataset and filters out irrelevant entries, particularly focusing on the "thankyou-social" submissions. The result is a streamlined CSV that makes the matching process with the Qualtrics data more efficient.
   
-- **Key Features**:
-  - **Data Loading**: Imports data from 'Matomo.csv', keeping in mind the tab delimiters and utf-16 encoding.
-  - **Column Filtering**: Specifically seeks out columns of interest and those related to action details.
-  - **Data Filtration**: Filters rows based on the values in the 'pageTitle (actionDetails X)' columns.
-  - **Cleanup**: The script omits NaN-heavy rows and columns to refine the dataset.
-  - **Output**: The polished data is stored in `filtered_data.csv` for subsequent use.
+- **Main Functions**: 
+  - Data Filtering: Removes rows not related to "thankyou-social".
+  - Extraction of Relevant Columns: Retains only the columns that are essential for the matching process.
 
-### 2. Qualtrics Data Matcher (`qualtrics_matching.py`)
-- **Purpose**: Efficiently processes and matches survey data from Qualtrics with a previously processed dataset, merging the data and flagging matches and repeated users.
+### 2. `qualtrics_matching.py`: 
+- **Description**: The core of the project, this script takes the Qualtrics dataset and the pre-processed Matomo data, performs an intricate matching operation, and then visually represents the results in an Excel file. The visual representation aids in quickly understanding the proportion of data that matches between the two sources.
   
-- **Key Features**:
-  - **Date Formatting**: It loads 'Qualtrics.csv' and tailors the format of date columns for further processing.
-  - **Data Matching**: By utilizing the 'RecordedDate' field, it matches survey data with entries in `filtered_data.csv`.
-  - **Repeated User Identification**: It flags users who have appeared multiple times based on IP address analysis.
-  - **Output**: The consolidated and matched data is captured in `Qualtrics_matching.csv`.
+- **Main Functions**:
+  - Data Matching: Compares Qualtrics and Matomo data based on specific parameters.
+  - Excel Output Generation: Constructs an Excel sheet complete with pie charts visualizing the matched and unmatched data.
+  - Data Visualization: Uses xlsxwriter to craft detailed pie charts that visually represent the results of the matching operation.
 
-## Prerequisites
-1. Ensure that Python is installed on your machine.
-2. Install the essential libraries:
-   ```bash
-   pip install pandas numpy
-   ```
+## Prerequisites:
+- Ensure you have Python 3.10 installed.
+- Required Libraries:
+  - pandas
+  - numpy
+  - xlsxwriter
 
-## Usage
-1. Place the required CSV files (`Matomo.csv` and `Qualtrics.csv`) in the working directory before executing the scripts.
-2. Initiate the Matomo data processing:
-   ```bash
-   python matomo_processing.py
-   ```
-   This creates `filtered_data.csv`.
-3. Next, run the Qualtrics data matcher:
-   ```bash
-   python qualtrics_matching.py
-   ```
-   This synthesizes `Qualtrics_matching.csv` using the previously generated `filtered_data.csv` and original `Qualtrics.csv`.
+## How to Use:
 
-## Contributing
-Your contributions can further refine these scripts. Please initiate an issue for discussions or directly submit a pull request.
+1. **Setting up the Environment**
+   - Install the necessary Python packages using pip:
+     ```
+     pip install pandas numpy xlsxwriter
+     ```
+
+2. **Processing the Matomo Dataset**
+   - Place the `Matomo.csv` file in your working directory.
+   - Run the `matomo_processing.py` script:
+     ```
+     python matomo_processing.py
+     ```
+   - This will generate a `filtered_data.csv` that contains only relevant rows from the Matomo dataset.
+
+3. **Matching and Analyzing the Qualtrics Data**
+   - Ensure `Qualtrics1.csv` is in your working directory.
+   - Run the `qualtrics_matching.py` script:
+     ```
+     python qualtrics_matching.py
+     ```
+   - This will output an Excel file named `Qualtrics_Validation_Facebook_09-11To09-22.xlsx` with the comparison results, including pie charts visualizing the matching data.
+
+## Project Highlights:
+
+- **Data Filtering and Validation**: The scripts efficiently process raw data, filtering out unnecessary rows and columns, ensuring that only relevant data is utilized for matching and analysis.
+  
+- **Visualization**: The results are visually represented in the form of pie charts in the Excel output, making it easy to discern the proportion of matched vs unmatched data.
+
+- **Efficiency**: Through Python's powerful libraries, the scripts handle large datasets smoothly, ensuring optimal performance.
+
+## Future Enhancements:
+
+- Integrate more visualization techniques, such as bar charts or histograms.
+- Add functionality to automate the fetching of datasets from respective sources.
+- Implement logging to keep track of script operations and any potential issues.
+
+## Feedback and Contributions:
+
+We appreciate feedback and contributions. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+
 
