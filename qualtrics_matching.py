@@ -19,10 +19,10 @@ def process_qualtrics(input_csv, output_xlsx):
     qualtrics_df['IP Matched/Not Matched'] = 'Not Matched'
     qualtrics_df['Repeated User'] = 'No'
 
-    # Load the filtered_data.csv into a DataFrame
-    filtered_df = pd.read_csv('filtered_data.csv')
+    # Load the filtered_matomo_data.csv into a DataFrame
+    filtered_df = pd.read_csv('filtered_matomo_data.csv')
 
-    # Get unique IPs from filtered_data.csv
+    # Get unique IPs from filtered_matomo_data.csv
     filtered_ips = filtered_df['visitIp'].unique()
 
     # Initialize new columns with NaN values
@@ -30,7 +30,7 @@ def process_qualtrics(input_csv, output_xlsx):
     for col in new_columns:
         qualtrics_df[col] = np.nan
 
-    # Loop through each 'serverTimePretty (actionDetails X)' column in filtered_data.csv
+    # Loop through each 'serverTimePretty (actionDetails X)' column in filtered_matomo_data.csv
     for col in filtered_df.columns:
         if 'serverTimePretty (actionDetails' in col:
             # Convert the column to datetime

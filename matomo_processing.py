@@ -1,13 +1,14 @@
 import pandas as pd
 import sys
 
-def process_matomo(input_file):
 
+def process_matomo(input_file):
     # Read the CSV file into a DataFrame with the correct delimiter and encoding
     df = pd.read_csv(input_file, delimiter='\t', encoding='utf-16')
 
     # Create a list of specific columns you want to keep
-    specific_columns = ['idVisit', 'visitIp', 'serverTimePretty', 'visitDurationPretty', 'referrerName', 'referrerKeyword']
+    specific_columns = ['idVisit', 'visitIp', 'serverTimePretty', 'visitDurationPretty', 'referrerName',
+                        'referrerKeyword']
 
     # Find columns that start with "serverTimePretty (actionDetails"
     action_details_columns = [col for col in df.columns if 'serverTimePretty (actionDetails' in col]
@@ -35,7 +36,7 @@ def process_matomo(input_file):
     df_filtered.dropna(axis=1, how='all', inplace=True)
 
     # Save the filtered DataFrame to a new CSV file
-    df_filtered.to_csv('filtered_data.csv', index=False)
+    df_filtered.to_csv('filtered_matomo_data.csv', index=False)
 
     # Terminate the program
     sys.exit(0)
