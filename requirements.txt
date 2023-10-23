@@ -1,0 +1,5 @@
+pandas
+numpy
+XlsxWriter
+
+# pip install -r requirements.txt
