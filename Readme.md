@@ -43,8 +43,8 @@ This project is aimed at processing and matching data from Matomo and Qualtrics.
 
 ### Input Files
 
-1. Place your Matomo CSV file in the project directory. The default name should be 'Matomo3.csv'.
-2. Place your Qualtrics CSV file in the project directory. The default name should be 'Qualtrics6.csv'.
+1. Place your Matomo CSV file in the project directory. The default name should be 'Matomo.csv'.
+2. Place your Qualtrics CSV file in the project directory. The default name should be 'Qualtrics.csv'.
 
 ### Output Files
 
