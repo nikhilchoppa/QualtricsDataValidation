@@ -9,10 +9,9 @@ def process_qualtrics(input_csv, output_xlsx):
     qualtrics_df = pd.read_csv(input_csv, delimiter=',', dtype={'IPAddress': str})
 
     # Convert the 'RecordedDate' and 'StartDate' columns in Qualtrics to datetime
-    qualtrics_df['RecordedDate'] = pd.to_datetime(qualtrics_df['RecordedDate'], format='%m/%d/%y %H:%M').dt.strftime(
-        '%m/%d/%y %H:%M')
-    qualtrics_df['StartDate'] = pd.to_datetime(qualtrics_df['StartDate'], format='%m/%d/%y %H:%M').dt.strftime(
-        '%m/%d/%y %H:%M')
+    qualtrics_df['RecordedDate'] = pd.to_datetime(qualtrics_df['RecordedDate'], format='%m/%d/%Y %H:%M',
+                                                  errors='coerce')
+    qualtrics_df['StartDate'] = pd.to_datetime(qualtrics_df['StartDate'], format='%m/%d/%Y %H:%M', errors='coerce')
 
     # Add 'IP and TimeStamp Matched/Not Matched' column and 'Repeated User' column
     qualtrics_df['TimeStamp Matched/Not Matched'] = 'Not Matched'
