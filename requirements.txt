@@ -1,5 +1,10 @@
-pandas
 numpy
+pandas
+python-dateutil
+pytz
+six
+tzdata
 XlsxWriter
+
 
 # pip install -r requirements.txt

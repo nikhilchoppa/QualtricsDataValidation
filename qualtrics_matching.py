@@ -47,7 +47,7 @@ def process_qualtrics(input_csv, output_xlsx):
                 if not matching_rows.empty:
                     qualtrics_df.at[index, 'TimeStamp Matched/Not Matched'] = 'Matched'
                     qualtrics_df.at[index, 'ThankYou-ActionTime'] = matching_rows.iloc[0][col].strftime(
-                        '%m/%d/%y %H:%M')
+                        '%m/%d/%Y %H:%M')
 
                     for new_col in new_columns:
                         qualtrics_df.at[index, new_col] = matching_rows.iloc[0][new_col]

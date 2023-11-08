@@ -24,7 +24,7 @@ def run_qualtrics_matching(input_csv, output_xlsx):
 if __name__ == "__main__":
     matomo_input_file = 'Matomo3.csv'
     qualtrics_input_csv = 'Qualtrics6.csv'
-    qualtrics_output_xlsx = 'Qualtrics_Validation_All_10-03To10-16.xlsx'
+    qualtrics_output_xlsx = 'Qualtrics_Validation_matomo_thankyou_10-03To10-16.xlsx'
 
     run_matomo_process(matomo_input_file)
     run_qualtrics_matching(qualtrics_input_csv, qualtrics_output_xlsx)
