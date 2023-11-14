@@ -19,7 +19,7 @@ def process_qualtrics(input_csv, output_xlsx):
         for date_format in ['%m/%d/%Y %H:%M', '%m/%d/%y %H:%M']:
             try:
                 qualtrics_df[date_column] = pd.to_datetime(qualtrics_df[date_column], format=date_format).dt.strftime(
-                    '%Y-%m-%d %H:%M')
+                    '%m-%d-%Y %H:%M')
                 break
             except ValueError:
                 continue
