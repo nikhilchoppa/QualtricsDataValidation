@@ -9,10 +9,22 @@ def process_qualtrics(input_csv, output_xlsx):
     qualtrics_df = pd.read_csv(input_csv, delimiter=',', dtype={'IPAddress': str})
 
     # Convert the 'RecordedDate' and 'StartDate' columns in Qualtrics to datetime
-    qualtrics_df['RecordedDate'] = pd.to_datetime(qualtrics_df['RecordedDate'], format='%m/%d/%y %H:%M').dt.strftime(
-        '%m/%d/%Y %H:%M')
-    qualtrics_df['StartDate'] = pd.to_datetime(qualtrics_df['StartDate'], format='%m/%d/%y %H:%M').dt.strftime(
-        '%m/%d/%Y %H:%M')
+    #qualtrics_df['RecordedDate'] = pd.to_datetime(qualtrics_df['RecordedDate'], format='%m/%d/%y %H:%M').dt.strftime('%m/%d/%Y %H:%M')
+
+    # qualtrics_df['RecordedDate'] = pd.to_datetime(qualtrics_df['RecordedDate'], format='%m/%d/%y %H:%M').dt.strftime(
+    #     '%Y-%m-%d %H:%M')
+    # qualtrics_df['StartDate'] = pd.to_datetime(qualtrics_df['StartDate'], format='%m/%d/%y %H:%M').dt.strftime(
+    #     '%Y-%m-%d %H:%M')
+    for date_column in ['RecordedDate', 'StartDate']:
+        for date_format in ['%m/%d/%Y %H:%M', '%m/%d/%y %H:%M']:
+            try:
+                qualtrics_df[date_column] = pd.to_datetime(qualtrics_df[date_column], format=date_format).dt.strftime(
+                    '%Y-%m-%d %H:%M')
+                break
+            except ValueError:
+                continue
+
+    #qualtrics_df['StartDate'] = pd.to_datetime(qualtrics_df['StartDate'], format='%m/%d/%y %H:%M').dt.strftime('%m/%d/%Y %H:%M')
 
     # Add 'IP and TimeStamp Matched/Not Matched' column and 'Repeated User' column
     qualtrics_df['TimeStamp Matched/Not Matched'] = 'Not Matched'
